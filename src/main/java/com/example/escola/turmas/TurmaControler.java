@@ -27,8 +27,8 @@ public class TurmaControler {
         return this.turmaService.adicionarAlunoTurma(idTurma, idAluno);
     }
 
-    @DeleteMapping("{/idTurma}")
-    public Turma deleteAlunoTurma(@PathVariable("idTurma") Long idTurma, @RequestBody Long idAluno){
-        return this.turmaService.deletarAlunoTurma(idTurma, idAluno);
+    @DeleteMapping("/{idTurma}")
+    public void deleteAlunoTurma(@PathVariable("idTurma") Long idTurma, @RequestBody Long idAluno){
+        this.turmaService.deletarAlunoTurma(idTurma, idAluno);
     }
 }

@@ -22,18 +22,20 @@ public class TurmaService {
         for (int i = 0; i < t.alunosId().size(); i++) {
             Aluno aluno = this.alunoService.getById(t.alunosId().get(i));
             listaAlunos.add(aluno);
-        };
+        }
+        ;
 
         Turma turma = new Turma(listaAlunos);
         return this.turmaRepository.save(turma);
     }
-    public List<Turma> listarTodas(){
+
+    public List<Turma> listarTodas() {
         return this.turmaRepository.findAll();
     }
 
-    public Turma adicionarAlunoTurma(Long idTurma, Long idAluno){
+    public Turma adicionarAlunoTurma(Long idTurma, Long idAluno) {
         boolean hasTurma = this.turmaRepository.findById(idTurma).isPresent();
-        if (hasTurma){
+        if (hasTurma) {
             Turma t = this.turmaRepository.findById(idTurma).get();
             Aluno a = this.alunoService.getById(idAluno);
             t.getAlunos().add(a);
@@ -43,7 +45,14 @@ public class TurmaService {
         }
     }
 
-    public Turma deletarAlunoTurma(Long idTurma, Long idAluno) {
-        boolean
+    public void deletarAlunoTurma(Long idTurma, Long idAluno) {
+        boolean hasTurma = this.turmaRepository.findById(idTurma).isPresent();
+        boolean hasAluno = this.turmaRepository.findById(idAluno).isPresent();
+        if (hasAluno || hasTurma) {
+            Turma turma = this.turmaRepository.findById(idTurma).get();
+            Aluno a = this.alunoService.getById(idAluno);
+
+           this.turmaRepository.deleteById(idAluno);
+        }
     }
 }
