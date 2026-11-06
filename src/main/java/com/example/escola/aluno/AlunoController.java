@@ -21,8 +21,19 @@ public class AlunoController {
         return this.alunoService.listarAlunos();
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public Aluno getById(@PathVariable("id") Long id){
         return this.alunoService.getById(id);
     }
+
+    @PutMapping("/{id}")
+    public Aluno putAluno(@PathVariable("id") Long id,@RequestBody Aluno aluno){
+        return this.alunoService.atualizarAluno(id, aluno);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteAluno(@PathVariable("id") Long id){
+        this.alunoService.apagarAluno(id);
+    }
+
 }

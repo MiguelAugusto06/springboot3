@@ -3,7 +3,6 @@ package com.example.escola.turmas;
 
 import com.example.escola.aluno.Aluno;
 import com.example.escola.aluno.AlunoService;
-import org.hibernate.mapping.Array;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +29,21 @@ public class TurmaService {
     }
     public List<Turma> listarTodas(){
         return this.turmaRepository.findAll();
+    }
+
+    public Turma adicionarAlunoTurma(Long idTurma, Long idAluno){
+        boolean hasTurma = this.turmaRepository.findById(idTurma).isPresent();
+        if (hasTurma){
+            Turma t = this.turmaRepository.findById(idTurma).get();
+            Aluno a = this.alunoService.getById(idAluno);
+            t.getAlunos().add(a);
+            return this.turmaRepository.save(t);
+        } else {
+            return null;
+        }
+    }
+
+    public Turma deletarAlunoTurma(Long idTurma, Long idAluno) {
+        boolean
     }
 }

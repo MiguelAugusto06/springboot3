@@ -21,4 +21,14 @@ public class TurmaControler {
     public List<Turma> listarTodas(){
         return this.turmaService.listarTodas();
     }
+
+    @PutMapping("/{idTurma}")
+    public Turma updateAlunoTurma(@PathVariable("idTurma") Long idTurma, @RequestBody Long idAluno){
+        return this.turmaService.adicionarAlunoTurma(idTurma, idAluno);
+    }
+
+    @DeleteMapping("{/idTurma}")
+    public Turma deleteAlunoTurma(@PathVariable("idTurma") Long idTurma, @RequestBody Long idAluno){
+        return this.turmaService.deletarAlunoTurma(idTurma, idAluno);
+    }
 }
